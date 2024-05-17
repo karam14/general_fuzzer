@@ -124,9 +124,11 @@ class AnomalyAnalyzer:
     def test_hypotheses(self, hypotheses, executable, validate_output, initial_output, attack_keywords, marker):
         results = []
         for index, char in hypotheses:
-            # Ensure the test input is long enough to include all hypothesis positions
-            test_input = ['a'] * self.max_length  # Use a default character to fill the buffer
-            test_input[index] = char  # Place the character from the hypothesis
+            # Calculate effective position considering the marker length
+            effective_index = (index - len(marker)) if marker else index
+            effective_length = self.max_length  # The input length without marker considered
+            test_input = ['a'] * effective_length  # Use a default character to fill the buffer
+            test_input[effective_index] = char  # Place the character from the hypothesis
             test_input = marker + "".join(test_input) if marker else "".join(test_input)
             stdout, stderr = run_process(executable, test_input)
             anomaly_detected = validate_output(initial_output, stdout, stderr, test_input, attack_keywords, marker)
@@ -140,8 +142,11 @@ class AnomalyAnalyzer:
         
         for index in format_string_positions:
             for specifier in format_specifiers:
-                test_input = ['a'] * self.max_length
-                test_input[index] = specifier
+                # Calculate effective position considering the marker length
+                effective_index = index + len(marker) if marker else index
+                effective_length = self.max_length  # The input length without marker considered
+                test_input = ['a'] * effective_length
+                test_input[effective_index] = specifier
                 test_input = marker + "".join(test_input) if marker else "".join(test_input)
                 stdout, stderr = run_process(executable, test_input)
                 anomaly_detected = validate_output(initial_output, stdout, stderr, test_input, attack_keywords, marker)
@@ -163,7 +168,7 @@ class AnomalyAnalyzer:
         report.append("\nExtended Analytics (Further testing results):")
         for i, (index, char, test_input, stdout, stderr, anomaly_detected) in enumerate(hypothesis_results):
             if index is not None and char is not None:
-                report.append(f"Hypothesis {i+1}: Character '{char}' at position {index} with test input '{test_input}'")
+                report.append(f"Hypothesis {i+1}: Character '{char}' at position {index + 1} with test input '{test_input}'")
             else:
                 report.append(f"Hypothesis {i+1}: Random input '{test_input}'")
             report.append(f"Testing result: STDOUT: {stdout} STDERR: {stderr}")
@@ -174,7 +179,7 @@ class AnomalyAnalyzer:
         report.append("\nFinal Result with Confirmed Hypotheses:")
         if confirmed_hypotheses:
             for index, char, test_input in confirmed_hypotheses:
-                report.append(f"Confirmed Hypothesis: Character '{char}' at position {index} with test input '{test_input}'")
+                report.append(f"Confirmed Hypothesis: Character '{char}' at position {index + 1} with test input '{test_input}'")
             if any(char in ['%s', '%d', '%x', '%f', '%p', '%n'] for _, char, test_input in confirmed_hypotheses):
                 report.append("Format string vulnerability detected")
         else:
