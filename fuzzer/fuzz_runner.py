@@ -8,6 +8,7 @@ from fuzzer.result_handler import ResultHandler
 from fuzzer.analyzer import AnomalyAnalyzer
 from fuzzer.config import Config
 from fuzzer.utils import run_process
+from fuzzer.exploiter import Exploiter
 
 logger = logging.getLogger(__name__)
 
@@ -108,3 +109,23 @@ class FuzzRunner:
                 with open(Config.RESULTS_FILE, "a", encoding='utf-8') as file:
                     file.write("\n" + "="*60 + "\n")
                     file.write(report)
+
+                # Exploit confirmed hypotheses
+                exploiter = Exploiter(self.executable, Validator.validate_output_with_variation, self.initial_output, self.attack_keywords, self.marker)
+
+                # Check for format string vulnerabilities and exploit if found
+                if "Format string vulnerability detected" in report:
+                    format_string_positions = [index for index, char, _, _, _, _ in hypothesis_results if char == '%']
+                    if format_string_positions:
+                        flag = exploiter.exploit_format_string(format_string_positions)
+                        if flag:
+                            logger.info(f"Flag found during format string exploitation: {flag}")
+                        else:
+                            logger.info("No flag found during format string exploitation.")
+
+                # Check for flags in other vulnerabilities
+                flag = exploiter.check_for_flag(hypothesis_results)
+                if flag:
+                    logger.info(f"Flag found in hypothesis results: {flag}")
+                else:
+                    logger.info("No flag found in hypothesis results.")
