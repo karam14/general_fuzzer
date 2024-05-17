@@ -8,11 +8,10 @@ This project is a fuzzer designed to automatically find vulnerabilities in `mode
 ## Features
 
 - **Automated Input Generation**: Generates random and mutated inputs to test the target binaries.
-- ** [**WORK IN PROGRESS] Anomalies Detection**: Identifies anomalies that may be a cause for a potential vulerability such as format string and other anomalies.
-  
-- **Advanced Analysis**: Uses machine learning techniques to refine hypotheses and improve the detection of anomalies.
-- **Format String Vulnerability Testing**: Specifically tests format string specifiers to detect vulnerabilities.
-- **Detailed Reporting**: Provides comprehensive reports on detected vulnerabilities and their characteristics.
+- **[WORK IN PROGRESS] Anomalies Detection**: Identifies anomalies that may be a cause for a potential vulnerability such as format string and other anomalies.
+- **[WORK IN PROGRESS] Advanced Analysis**: Uses machine learning techniques to refine hypotheses and improve the detection of anomalies.
+- **[WORK IN PROGRESS] Format String Vulnerability Testing**: Specifically tests format string specifiers to detect vulnerabilities.
+- **[WORK IN PROGRESS] Detailed Reporting**: Provides comprehensive reports on detected vulnerabilities and their characteristics.
 
 ## Requirements
 
@@ -27,27 +26,50 @@ This project is a fuzzer designed to automatically find vulnerabilities in `mode
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/fuzzer.git
+   git clone https://github.com/karam14/general_fuzzer.git
    cd fuzzer
    ```
 
-2. Install the required packages:
+2. Set up a virtual environment:
 
    ```sh
-   pip install -r requirements.txt
+   python -m venv venv
+   ```
+
+3. Activate the virtual environment:
+
+   - On Windows:
+
+     ```sh
+     venv\Scripts\activate
+     ```
+
+
+
+4. Install the required packages:
+
+   ```sh
+   pip install -r requirements.txt 
    ```
 
 ## Usage
 
+1. Activate the virtual environment if not already activated:
+
+   - On Windows:
+
+     ```sh
+     venv\Scripts\activate
+     ```
 
 
-1. Run the fuzzer:
+2. Run the fuzzer:
 
    ```sh
    python main.py
    ```
 
-2. Follow the on-screen instructions to specify the target executable (`modern2.exe` or `modern3.exe`), buffer size, mutation rate, number of tests per worker, and type of vulnerability to test for.
+3. Follow the on-screen instructions to specify the target executable (`modern2.exe` or `modern3.exe`), buffer size, mutation rate, number of tests per worker, and type of vulnerability to test for.
 
 ## Configuration
 
@@ -89,7 +111,7 @@ Follow the prompts:
 - Enter the executable and its arguments (e.g., `./modern3.exe`).
 - Enter the buffer size (e.g., `40`).
 - Enter the mutation rate (0.0 - 1.0, e.g., `0.1`).
-- Enter the number of tests per worker (e.g., `200`)., it's worth mentioning that the more tests you run, the more accurate the results will be, lower than 200 can't guarantee you a finding.
+- Enter the number of tests per worker (e.g., `200`). It's worth mentioning that the more tests you run, the more accurate the results will be. Running fewer than 200 tests might not guarantee a finding.
 - Choose the type of vulnerability to test for:
   1. Automated random mutation fuzzing
   2. Format String based mutation fuzzing
@@ -109,5 +131,8 @@ The fuzzer generates detailed logs and reports that include:
 - **Automatic Exploitation**: Develop functionality to automatically exploit identified vulnerabilities.
 - **Extended Support**: Add support for more types of vulnerabilities and more target binaries.
 - **Improved Analysis**: Enhance machine learning models to improve the accuracy and efficiency of vulnerability detection.
-- **GUI interaction**: Implement a GUI for easier configuration and reporting.
+- **GUI Interaction**: Implement a GUI for easier configuration and reporting.
 
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit pull requests.
