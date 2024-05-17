@@ -111,7 +111,7 @@ Follow the prompts:
 - Enter the executable and its arguments (e.g., `./modern3.exe`).
 - Enter the buffer size (e.g., `40`).
 - Enter the mutation rate (0.0 - 1.0, e.g., `0.1`).
-- Enter the number of tests per worker (e.g., `200`). It's worth mentioning that the more tests you run, the more accurate the results will be. Running fewer than 200 tests might not guarantee a finding.
+- Enter the number of tests per worker (e.g., `40`). It's worth mentioning that the more tests you run, the more accurate the results will be. Running fewer than 40 tests might not guarantee a finding.
 - Choose the type of vulnerability to test for:
   1. Automated random mutation fuzzing
   2. Format String based mutation fuzzing
