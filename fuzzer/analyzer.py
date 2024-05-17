@@ -143,7 +143,7 @@ class AnomalyAnalyzer:
         for index in format_string_positions:
             for specifier in format_specifiers:
                 # Calculate effective position considering the marker length
-                effective_index = index + len(marker) if marker else index
+                effective_index = index - len(marker) if marker else index
                 effective_length = self.max_length  # The input length without marker considered
                 test_input = ['a'] * effective_length
                 test_input[effective_index] = specifier
