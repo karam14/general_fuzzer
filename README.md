@@ -11,7 +11,7 @@ This project is a fuzzer designed to automatically find vulnerabilities in `mode
 - **Anomalies Detection**: Identifies anomalies that may be a cause for a potential vulnerability such as format string and other anomalies.
 - **Advanced Analysis**: Uses machine learning techniques to refine hypotheses and improve the detection of anomalies.
 - **Format String Vulnerability Testing**: Specifically tests format string specifiers to detect vulnerabilities.
-- **[WORK IN PROGRESS] Detailed Reporting**: Provides comprehensive reports on detected vulnerabilities and their characteristics.
+- **Detailed Reporting**: Provides comprehensive reports on detected vulnerabilities and their characteristics.
 
 ## Requirements
 
