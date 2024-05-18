@@ -104,28 +104,24 @@ class FuzzRunner:
                     analysis_results
                 )
                 report = analyzer.report_results(analysis_results, hypothesis_results)
+                ResultHandler.save_report(report, "fuzzing_report.txt")
 
-                # Save the final report
-                with open(Config.RESULTS_FILE, "a", encoding='utf-8') as file:
-                    file.write("\n" + "="*60 + "\n")
-                    file.write(report)
+                # print("\n=== Fuzzing Report ===")
+                # print(report)
 
-                # Exploit confirmed hypotheses
                 exploiter = Exploiter(self.executable, Validator.validate_output_with_variation, self.initial_output, self.attack_keywords, self.marker)
 
-                # Check for format string vulnerabilities and exploit if found
                 if "Format string vulnerability detected" in report:
                     format_string_positions = [index for index, char, _, _, _, _ in hypothesis_results if char == '%']
                     if format_string_positions:
                         flag = exploiter.exploit_format_string(format_string_positions)
                         if flag:
-                            logger.info(f"Flag found during format string exploitation: {flag}")
+                            print("")
+                            # logger.info(f"Flag found during format string exploitation: {flag}")
+                            # print(f"Flag found during format string exploitation: {flag}")
                         else:
                             logger.info("No flag found during format string exploitation.")
+                            print("No flag found during format string exploitation.")
 
-                # Check for flags in other vulnerabilities
                 flag = exploiter.check_for_flag(hypothesis_results)
-                if flag:
-                    logger.info(f"Flag found in hypothesis results: {flag}")
-                else:
-                    logger.info("No flag found in hypothesis results.")
+            

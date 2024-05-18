@@ -34,13 +34,19 @@ def main():
         num_tests_per_worker,
         vulnerability_type
     )
+    print("================================================================================\n")
+    print("Fuzzing process started. Check the logs for more details.")
     
     logging.info("Starting the fuzzing process.")
+    
     with open(RESULTS_FILE, "w", encoding='utf-8') as file:
         file.write("Fuzzing Results\n" + "="*60 + "\n")
 
     fuzz_runner.run()
     logging.info("Fuzzing process completed.")
 
+from logging_config import setup_logging
+
 if __name__ == "__main__":
+    setup_logging()
     main()

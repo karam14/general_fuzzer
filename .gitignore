@@ -4,4 +4,6 @@ fuzzing_log.txt
 fuzzing_results.txt
 .vscode
 fuzzer/__pycache__
-fuzzer\__pycache__
+__pycache__
+logs
+results
