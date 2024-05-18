@@ -1,11 +1,14 @@
 
-# Fuzzer for Vulnerability Detection
+# General Fuzzer: The Modern Vulnerability Detector
+
+![General Fuzzer](/assets/general_fuzzer.webp)
 
 ## Overview
 
 This project is a fuzzer designed to automatically find vulnerabilities in `modern2.exe` and `modern3.exe`. The fuzzer uses various fuzzing techniques to generate inputs, execute the target binaries, and analyze the outputs to identify potential security vulnerabilities. In the future, this fuzzer will also include capabilities to automatically exploit the identified vulnerabilities.
 
 ## Features
+
 
 - **Automated Input Generation**: Generates random and mutated inputs to test the target binaries.
 - **Anomalies Detection**: Identifies anomalies that may be a cause for a potential vulnerability such as format string and other anomalies.
