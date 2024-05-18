@@ -27,7 +27,7 @@ This project is a fuzzer designed to automatically find vulnerabilities in `mode
 
    ```sh
    git clone https://github.com/karam14/general_fuzzer.git
-   cd fuzzer
+   cd general_fuzzer
    ```
 
 2. Set up a virtual environment:
